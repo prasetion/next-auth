@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Layout from "@/layout/layout";
 import Link from "next/link";
+import styles from "../styles/form.module.css";
+import Image from "next/image";
+import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 
 const login = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <div>
       <Layout>
@@ -17,21 +22,56 @@ const login = () => {
           </div>
 
           <form action="" className="flex flex-col gap-5">
-            <div className=" input-group">
-              <input type="email" name="email" placeholder="email" />
+            <div className={styles.input_group}>
+              <input
+                type="email"
+                name="email"
+                placeholder="email"
+                className={styles.input_text}
+              />
+              <span className="icon flex items-center px-4">
+                <HiAtSymbol size={25} />
+              </span>
             </div>
-            <div className=" input-group">
-              <input type="password" name="password" placeholder="password" />
+            <div className={styles.input_group}>
+              <input
+                type={`${show ? "text" : "password"}`}
+                name="password"
+                placeholder="password"
+                className={styles.input_text}
+              />
+              <span
+                className="icon flex items-center px-4"
+                onClick={() => setShow(!show)}
+              >
+                <HiFingerPrint size={25} />
+              </span>
             </div>
 
-            <div className="input-button">
-              <button type="submit">Login</button>
+            <div>
+              <button type="submit" className={styles.button}>
+                Login
+              </button>
             </div>
-            <div className="input-button">
-              <button type="submit">Sign In with Google</button>
+            <div>
+              <button type="submit" className={styles.button_custom}>
+                Sign In with Google{" "}
+                <Image
+                  src={"/assets/google.svg"}
+                  width={20}
+                  height={20}
+                ></Image>
+              </button>
             </div>
-            <div className="input-button">
-              <button type="submit">Sign In with Github</button>
+            <div>
+              <button type="submit" className={styles.button_custom}>
+                Sign In with Github{" "}
+                <Image
+                  src={"/assets/github.svg"}
+                  width={25}
+                  height={25}
+                ></Image>
+              </button>
             </div>
           </form>
           <p className="text-center text-gray-400">
