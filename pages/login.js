@@ -5,9 +5,15 @@ import Link from "next/link";
 import styles from "../styles/form.module.css";
 import Image from "next/image";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
+import { signIn, signOut } from "next-auth/react";
 
 const login = () => {
   const [show, setShow] = useState(false);
+
+  // google handler function
+  async function handlerGoogleSignIn() {
+    signIn("google", { callbackUrl: "http://localhost:3000" });
+  }
 
   return (
     <div>
@@ -53,27 +59,33 @@ const login = () => {
                 Login
               </button>
             </div>
-            <div>
-              <button type="submit" className={styles.button_custom}>
-                Sign In with Google{" "}
-                <Image
-                  src={"/assets/google.svg"}
-                  width={20}
-                  height={20}
-                ></Image>
-              </button>
-            </div>
-            <div>
-              <button type="submit" className={styles.button_custom}>
-                Sign In with Github{" "}
-                <Image
-                  src={"/assets/github.svg"}
-                  width={25}
-                  height={25}
-                ></Image>
-              </button>
-            </div>
           </form>
+          <div>
+            <button
+              type="submit"
+              onClick={handlerGoogleSignIn}
+              className={styles.button_custom}
+            >
+              Sign In with Google{" "}
+              <Image
+                src={"/assets/google.svg"}
+                width={20}
+                height={20}
+                alt="got it"
+              ></Image>
+            </button>
+          </div>
+          <div>
+            <button type="submit" className={styles.button_custom}>
+              Sign In with Github{" "}
+              <Image
+                src={"/assets/github.svg"}
+                width={25}
+                height={25}
+                alt="got it"
+              ></Image>
+            </button>
+          </div>
           <p className="text-center text-gray-400">
             don't have an account yet?{" "}
             <Link href={"/register"} className="text-blue-700">
