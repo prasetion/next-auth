@@ -15,6 +15,11 @@ const login = () => {
     signIn("google", { callbackUrl: "http://localhost:3000" });
   }
 
+  // github handler function
+  async function handlerGithubSignIn() {
+    signIn("github", { callbackUrl: "http://localhost:3000" });
+  }
+
   return (
     <div>
       <Layout>
@@ -76,7 +81,11 @@ const login = () => {
             </button>
           </div>
           <div>
-            <button type="submit" className={styles.button_custom}>
+            <button
+              type="submit"
+              onClick={handlerGithubSignIn}
+              className={styles.button_custom}
+            >
               Sign In with Github{" "}
               <Image
                 src={"/assets/github.svg"}
