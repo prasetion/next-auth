@@ -51,7 +51,13 @@ const login = () => {
             className="flex flex-col gap-5"
             onSubmit={formik.handleSubmit}
           >
-            <div className={styles.input_group}>
+            <div
+              className={`${styles.input_group} ${
+                formik.errors.email && formik.touched.email
+                  ? "border-rose-600"
+                  : ""
+              } `}
+            >
               <input
                 type="email"
                 name="email"
@@ -63,12 +69,18 @@ const login = () => {
                 <HiAtSymbol size={25} />
               </span>
             </div>
-            {formik.errors.email && formik.touched.email ? (
+            {/* {formik.errors.email && formik.touched.email ? (
               <span className=" text-rose-500">{formik.errors.email}</span>
             ) : (
               <></>
-            )}
-            <div className={styles.input_group}>
+            )} */}
+            <div
+              className={`${styles.input_group} ${
+                formik.errors.password && formik.touched.password
+                  ? "border-rose-600"
+                  : ""
+              } `}
+            >
               <input
                 type={`${show ? "text" : "password"}`}
                 name="password"
@@ -83,11 +95,11 @@ const login = () => {
                 <HiFingerPrint size={25} />
               </span>
             </div>
-            {formik.errors.password && formik.touched.password ? (
+            {/* {formik.errors.password && formik.touched.password ? (
               <span className=" text-rose-500">{formik.errors.password}</span>
             ) : (
               <></>
-            )}
+            )} */}
 
             <div>
               <button type="submit" className={styles.button}>
