@@ -8,9 +8,11 @@ import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "@/lib/validate";
+import { useRouter } from "next/router";
 
 const login = () => {
   const [show, setShow] = useState(false);
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -21,7 +23,17 @@ const login = () => {
   });
 
   async function onSubmit(values) {
-    console.log(values);
+    // console.log(values);
+    const status = await signIn("credentials", {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+      callbackUrl: "/",
+    });
+
+    if (status.ok) {
+      router.push(status.url);
+    }
   }
 
   // google handler function
@@ -69,11 +81,6 @@ const login = () => {
                 <HiAtSymbol size={25} />
               </span>
             </div>
-            {/* {formik.errors.email && formik.touched.email ? (
-              <span className=" text-rose-500">{formik.errors.email}</span>
-            ) : (
-              <></>
-            )} */}
             <div
               className={`${styles.input_group} ${
                 formik.errors.password && formik.touched.password
