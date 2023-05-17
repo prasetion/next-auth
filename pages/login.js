@@ -10,7 +10,7 @@ import { useFormik } from "formik";
 import login_validate from "@/lib/validate";
 import { useRouter } from "next/router";
 
-const login = () => {
+const Login = () => {
   const [show, setShow] = useState(false);
   const router = useRouter();
   const formik = useFormik({
@@ -156,4 +156,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
